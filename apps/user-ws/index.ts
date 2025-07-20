@@ -1,5 +1,5 @@
 import { WebSocketServer, WebSocket as TypeWsWebSocket } from "ws";
-const port = 8080; // or 8081
+const port = 8081; // or 8081
 
 const wss = new WebSocketServer({ port });
 

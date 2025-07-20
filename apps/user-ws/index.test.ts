@@ -2,11 +2,12 @@ import { describe, test, expect } from "bun:test";
 import { waitForSocketOpen } from "./utils";
 
 const BACKEND_URL = "ws://localhost:8080";
+const BACKEND_URL2 = "ws://localhost:8081";
 
 describe("Chat application", () => {
   test("message sent from room 1 broadcasts to all sockets in room 1", async () => {
     const ws1 = new WebSocket(BACKEND_URL);
-    const ws2 = new WebSocket(BACKEND_URL);
+    const ws2 = new WebSocket(BACKEND_URL2);
 
     console.log('Socket Connections')
     await Promise.allSettled([

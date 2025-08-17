@@ -43,7 +43,7 @@ export default function Home() {
   return (
     <div>
       <main className="h-screen flex items-center justify-center sm:p-7">
-        <div className="mx-auto h-full rounded-md border shadow-xl w-full max-w-lg relative p-2 flex flex-col">
+        <div className="mx-auto h-full rounded-md border shadow-xl w-full max-w-2xl relative p-2 flex flex-col">
           <div className="pb-3">
             {connectionStatus === "connecting" ? (
               <LoaderIcon className="animate-spin" />
@@ -61,7 +61,7 @@ export default function Home() {
           <ChatMessageContainer messages={messages} clientId={clientId} />
           <form
             onSubmit={handleSendMessage}
-            className="absolute left-0 right-0 bottom-0 p-2 flex bg-white"
+            className=" p-2 flex gap-2 bg-white"
           >
             <Input
               className=""

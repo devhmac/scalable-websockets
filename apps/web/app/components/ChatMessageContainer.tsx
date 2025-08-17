@@ -1,5 +1,7 @@
+"use client";
 import { ChatMessage } from "@repo/types";
 import { CheckCheck } from "lucide-react"; // ✅ install lucide-react
+import { useEffect, useRef, useState } from "react";
 
 export default function ChatMessageContainer({
   messages,
@@ -8,8 +10,35 @@ export default function ChatMessageContainer({
   messages: ChatMessage[];
   clientId: string;
 }) {
+  const containerRef = useRef<HTMLTableSectionElement>(null);
+  const [isUserAtBottom, setIsUserAtBottom] = useState(true);
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    // On mount or when messages are loaded, scroll to bottom
+    if (messages.length === 0) return;
+    if (isUserAtBottom || messages.length === 1) {
+      container.scrollTop = container.scrollHeight;
+    }
+  }, [messages.length, isUserAtBottom]);
+
+  // Track user scroll position
+  const handleScroll = () => {
+    const container = containerRef.current;
+    if (!container) return;
+    const buffer = 10;
+    const atBottom =
+      container.scrollTop + container.clientHeight >=
+      container.scrollHeight - buffer;
+    setIsUserAtBottom(atBottom);
+  };
   return (
-    <section className="flex flex-col gap-3 p-4 h-full overflow-y-auto flex-1">
+    <section
+      ref={containerRef}
+      className="flex flex-col gap-3 p-4 h-full overflow-y-auto flex-1"
+      onScroll={handleScroll}
+    >
       {messages.map((message, i) => {
         const isOwnMessage = message.username === clientId;
 

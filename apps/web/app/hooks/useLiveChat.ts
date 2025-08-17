@@ -2,10 +2,9 @@
 import { ChatMessage } from "@repo/types";
 import { useEffect, useRef, useState } from "react";
 
-export const useWebsocketServer = (
-  setMessages: React.Dispatch<React.SetStateAction<ChatMessage[]>>
-) => {
+export const useLiveChat = () => {
   const wsRef = useRef<WebSocket | null>(null);
+  const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [connectionStatus, setConnectionStatus] = useState("connecting");
 
   const sendMessage = (message: ChatMessage) => {
@@ -52,5 +51,5 @@ export const useWebsocketServer = (
       }
     };
   }, [setMessages]);
-  return { connectionStatus, sendMessage };
+  return { connectionStatus, messages, sendMessage };
 };

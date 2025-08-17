@@ -1,7 +1,7 @@
 "use client";
 import { ChatMessage } from "@repo/types";
 import { useState } from "react";
-import { useWebsocketServer } from "./hooks/useWebSocket";
+import { useLiveChat } from "./hooks/useLiveChat";
 import { Input } from "./components/ui/input";
 import { Button } from "./components/ui/button";
 import { Badge } from "./components/ui/badge";
@@ -18,9 +18,8 @@ export default function Home() {
     }
     return id;
   });
-  const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [newMessage, setNewMessage] = useState("");
-  const { connectionStatus, sendMessage } = useWebsocketServer(setMessages);
+  const { connectionStatus, messages, sendMessage } = useLiveChat();
 
   const handleSendMessage = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

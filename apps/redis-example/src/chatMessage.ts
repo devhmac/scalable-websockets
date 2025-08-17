@@ -1,5 +1,5 @@
-export interface ChatMessage {
-  username: string;
-  message: string;
-  timestamp: number;
-}
+// export interface ChatMessage {
+//   username: string;
+//   message: string;
+//   timestamp: number;
+// }
